@@ -190,3 +190,50 @@ it('off #3', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
+it('off #4', function() {
+    var n = 0;
+    var results = [];
+
+    events.on('foo:a', function() {
+        n++;
+        results.push('a');
+    });
+
+    events.on('foo:b', function() {
+        n++;
+        results.push('b');
+    });
+
+    events.on('foo:c', function() {
+        n++;
+        results.push('c');
+    });
+
+    events.trigger('foo:a');
+    events.trigger('foo:b');
+    events.trigger('foo:c');
+
+    n.should.be.eql(3);
+    results.should.be.eql( [ 'a', 'b', 'c' ] );
+
+    events.off('foo:a');
+
+    events.trigger('foo:a');
+    events.trigger('foo:b');
+    events.trigger('foo:c');
+
+    n.should.be.eql(5);
+    results.should.be.eql( [ 'a', 'b', 'c', 'b', 'c' ] );
+
+    events.off('foo:*');
+
+    events.trigger('foo:a');
+    events.trigger('foo:b');
+    events.trigger('foo:c');
+
+    n.should.be.eql(5);
+    results.should.be.eql( [ 'a', 'b', 'c', 'b', 'c' ] );
+});
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
