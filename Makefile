@@ -1,4 +1,5 @@
 tests:
+	mocha tests/no.events.js
 	mocha tests/no.jpath.js
 
 build:
