@@ -25,7 +25,6 @@
         "lib/no.*.js"
     ],
     "scripts": {
-          "test": "make tests"
+        "test": "make tests"
     }
 }
-
